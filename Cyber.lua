@@ -1,4 +1,4 @@
-flaps_cond = 0
+flaps_cond = 0 --Flaps condition
 flaps_p_cond = 0
 
 breaks_cond = 0
