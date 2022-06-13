@@ -4,18 +4,19 @@ flaps_p_cond = 0
 breaks_cond = 0
 breaks_p_cond = 0
 
-altitude = 150
-air_speed = 70
-gps_speed = 0
-heading = 315.4
-RSSI = 79
-FMode = 0
-Temperature = 0
-Tx_votage = 0
-Fuel = 39
-VFAS = 0 --voltage 
-Curr = 0 --current 
-
+--===============================================================================--
+altitude = 0 --altitude 
+air_speed = 0 --airflow speed
+gps_speed = 0 --GPS speed
+heading = 0 --magnetic heading 0 - North
+RSSI = 0 --Connection quality
+FMode = 0 --Flightmode
+Temperature = 0 -- not used
+Tx_votage = 0 --Your transmitter voltage
+Fuel = 0 --Remaining charge as a percentage
+VFAS = 0 --Battery voltage 
+Curr = 0 --Current in the power supply circuit
+--===============================================================================--
   
 local function drawFrame()
   --Draw main frame on screen. LCD width 127, height 63
