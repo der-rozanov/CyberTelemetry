@@ -1,7 +1,6 @@
 # CyberTelemetry
-=================================
-                              
-           Der Rozanov         
+
+## Der Rozanov         
                              
 
 
