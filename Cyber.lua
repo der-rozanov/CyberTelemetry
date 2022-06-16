@@ -10,7 +10,8 @@ tx_voltage = 0 --Your transmitter voltage
 fuel = 0 --Remaining charge as a percentage
 vfas = 0 --Battery voltage 
 current = 0 --Current in the power supply circuit
-
+flaps_stick = "sa" --The stick assigned to the flap control
+spoilers_stick = "sf" --The stick assigned to the spoilers control
 --===============================================================================--
   
 flaps_cond = 0 --Flaps condition
@@ -43,7 +44,8 @@ end
 
 local function WingMech(xz,yz)
   --[[  Flaps have two degrees of release. Low "L" and High "H". 
-        Each time, the correspondence of the current state of the toggle switch "sa" and the past is checked. 
+        Each time, the correspondence of the current state of the toggle switch flaps stick 
+        and the past is checked. 
         If the status has changed, an audible signal is issued ]]--
   lcd.drawRectangle(xz+1,yz+10,38,12,FORCE)
   
@@ -52,13 +54,13 @@ local function WingMech(xz,yz)
   local Flap_text_x = xz+5
   local Flap_text_y = yz+13
   
-  if getValue("sa") > -1024 then --check new state of flaps
+  if getValue(flaps_stick) > -1024 then --check new state of flaps
     flaps_cond = 1;
   else
     flaps_cond = 0;
   end
   
-  if getValue("sf") > -1024 then
+  if getValue(spoilers_stick) > -1024 then
     breaks_cond = 1
   else
     breaks_cond = 0
@@ -80,18 +82,18 @@ local function WingMech(xz,yz)
     end
   end
   
-  if getValue("sa") ~= -1024 or getValue("sf") == 1024 then
+  if getValue(flaps_stick) ~= -1024 or getValue(spoilers_stick) == 1024 then
     lcd.drawText(Wing_text_x,Wing_text_y,"Wing",BLINK) --if flaps down "wing" text will blink
     
-    if getValue("sa") == 0 then
+    if getValue(flaps_stick) == 0 then
       lcd.drawText(Flap_text_x,Flap_text_y,"Flaps L",SMLSIZE) --release degree
     end
     
-    if getValue("sa") == 1024 then
+    if getValue(flaps_stick) == 1024 then
       lcd.drawText(Flap_text_x,Flap_text_y,"Flaps H",SMLSIZE) --release degree
     end
     
-    if getValue("sf") > -1024 then
+    if getValue(spoilers_stick) > -1024 then
       lcd.drawText(Flap_text_x,Flap_text_y,"Breaks",SMLSIZE)
     end
     
@@ -100,13 +102,13 @@ local function WingMech(xz,yz)
     lcd.drawText(Flap_text_x,Flap_text_y,"Flap Up",SMLSIZE) 
   end
   
-  if getValue("sa") > -1024 then --remember current state of flaps
+  if getValue(flaps_stick) > -1024 then --remember current state of flaps
     flaps_p_cond = 1;
   else
     flaps_p_cond = 0;
   end
 	
-  if getValue("sf") > -1024 then
+  if getValue(spoilers_stick) > -1024 then
     breaks_p_cond = 1
   else
     breaks_p_cond = 0
