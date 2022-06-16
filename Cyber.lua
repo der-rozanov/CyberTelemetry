@@ -1,3 +1,4 @@
+--ttttt
 flaps_cond = 0 --Flaps condition
 flaps_p_cond = 0
 
