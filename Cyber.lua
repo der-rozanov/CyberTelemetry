@@ -1,10 +1,3 @@
---ttttt
-flaps_cond = 0 --Flaps condition
-flaps_p_cond = 0
-
-breaks_cond = 0
-breaks_p_cond = 0
-
 --===============================================================================--
 altitude = 0 --altitude 
 air_speed = 0 --airflow speed
@@ -17,8 +10,16 @@ Tx_votage = 0 --Your transmitter voltage
 Fuel = 0 --Remaining charge as a percentage
 VFAS = 0 --Battery voltage 
 Curr = 0 --Current in the power supply circuit
+
 --===============================================================================--
   
+flaps_cond = 0 --Flaps condition
+flaps_p_cond = 0
+
+breaks_cond = 0 --spoilers condition
+breaks_p_cond = 0
+
+
 local function drawFrame()
   --Draw main frame on screen. LCD width 127, height 63
   lcd.drawLine(40,0,40,63,SOLID,FORCE)
