@@ -3,13 +3,13 @@ altitude = 0 --altitude
 air_speed = 0 --airflow speed
 gps_speed = 0 --GPS speed
 heading = 0 --magnetic heading 0 - North
-RSSI = 0 --Connection quality
-FMode = 0 --Flightmode
-Temperature = 0 -- not used
-Tx_votage = 0 --Your transmitter voltage
-Fuel = 0 --Remaining charge as a percentage
-VFAS = 0 --Battery voltage 
-Curr = 0 --Current in the power supply circuit
+rssi = 0 --Connection quality
+flight_mode = 0 --Flightmode
+temperature = 0 -- not used
+tx_voltage = 0 --Your transmitter voltage
+fuel = 0 --Remaining charge as a percentage
+vfas = 0 --Battery voltage 
+current = 0 --Current in the power supply circuit
 
 --===============================================================================--
   
@@ -127,13 +127,13 @@ end
 
 local function bat_data()
   
-  lcd.drawGauge(1,9,37,8,Fuel,100)
+  lcd.drawGauge(1,9,37,8,fuel,100)
   lcd.drawLine(38,12,38,13,SOLID,FORCE)
   
-  lcd.drawNumber(1,18,10*VFAS,PREC1+SMLSIZE)
+  lcd.drawNumber(1,18,10*vfas,PREC1+SMLSIZE)
   lcd.drawText(lcd.getLastPos(),18,"V",SMLSIZE)
   
-  lcd.drawNumber(1,25,100*Curr,PREC2+SMLSIZE)
+  lcd.drawNumber(1,25,100*current,PREC2+SMLSIZE)
   lcd.drawText(lcd.getLastPos(),25,"A",SMLSIZE)
   
   lcd.drawText(1,32,"Tx",SMLSIZE)
@@ -145,11 +145,11 @@ end
 local function other_data(zx,zy)
   
   lcd.drawText(zx+2,zy+1,"SWR",SMLSIZE)
-  lcd.drawNumber(lcd.getLastPos()+2,zy+1,RSSI,SMLSIZE)
+  lcd.drawNumber(lcd.getLastPos()+2,zy+1,rssi,SMLSIZE)
   lcd.drawText(lcd.getLastPos(),zy+1,"dB",SMLSIZE)
   
   lcd.drawText(zx+2, zy+8,"Tmp",SMLSIZE)
-  lcd.drawNumber(lcd.getLastPos()+2, zy+8, Temperature, SMLSIZE)
+  lcd.drawNumber(lcd.getLastPos()+2, zy+8, temperature, SMLSIZE)
   lcd.drawText(lcd.getLastPos(), zy+8,"\64C",SMLSIZE)
   
 end
@@ -170,13 +170,13 @@ local function getTelemeryValue()
   air_speed = getValue("VSpd")
   gps_speed = getValue("GSpd")
   heading = getValue("Hdg")
-  RSSI = getValue("RSSI")
-  FMode = getValue("Tmp1")
-  Temperature = getValue("Tmp2")
-  Tx_votage = getValue("tx-voltage")
-  Fuel = getValue("Fuel")
-  VFAS = getValue("VFAS")
-  Curr = getValue("Curr")
+  rssi = getValue("RSSI")
+  flight_mode = getValue("Tmp1")
+  temperature = getValue("Tmp2")
+  tx_voltage = getValue("tx-voltage")
+  fuel = getValue("Fuel")
+  vfas = getValue("VFAS")
+  current = getValue("Curr")
 end
 
 local function run_func(event)
