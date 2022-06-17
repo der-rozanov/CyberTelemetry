@@ -116,7 +116,7 @@ local function WingMech(xz,yz)
 
 end
 
-local function spd_head_alt()
+local function SpeedHeadAlt()
   lcd.drawNumber(57,10,heading,SMLSIZE)  --top center position 
   lcd.drawText(lcd.getLastPos(),9,"\64")
   
@@ -127,7 +127,7 @@ local function spd_head_alt()
   lcd.drawText(77,33,"m",SMLSIZE)
 end
 
-local function bat_data()
+local function BatteryData()
   
   lcd.drawGauge(1,9,37,8,fuel,100)
   lcd.drawLine(38,12,38,13,SOLID,FORCE)
@@ -195,9 +195,9 @@ local function run_func(event)
   
   WingMech(0,40) --Flaps and breaks
   
-  spd_head_alt() --central screen
+  SpeedHeadAlt() --central screen
   
-  bat_data()
+  BatteryData()
   
   other_data(87,8)
   
