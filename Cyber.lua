@@ -42,7 +42,7 @@ local function drawBird(x_z,y_z) --Draw gyro horizon
 end
 
 
-local function WingMech(xz,yz)
+local function drawWindMech(xz,yz)
   --[[  Flaps have two degrees of release. Low "L" and High "H". 
         Each time, the correspondence of the current state of the toggle switch flaps stick 
         and the past is checked. 
@@ -116,47 +116,47 @@ local function WingMech(xz,yz)
 
 end
 
-local function SpeedHeadAlt()
-  lcd.drawNumber(57,10,heading,SMLSIZE)  --top center position 
-  lcd.drawText(lcd.getLastPos(),9,"\64")
+local function drawSpeedHeadAtl(xz,yz)
+  lcd.drawNumber(xz+17,yz+10,heading,SMLSIZE)  --top center position 
+  lcd.drawText(lcd.getLastPos(),yz+9,"\64")
   
-  lcd.drawNumber(46,27,air_speed,SMLSIZE) --bottom left 
-  lcd.drawText(42,33,"m/s",SMLSIZE)
+  lcd.drawNumber(xz+6,yz+27,air_speed,SMLSIZE) --bottom left 
+  lcd.drawText(xz+2,yz+33,"m/s",SMLSIZE)
   
-  lcd.drawNumber(72,27,altitude,SMLSIZE) --bottom right
-  lcd.drawText(77,33,"m",SMLSIZE)
+  lcd.drawNumber(xz+32,yz+27,altitude,SMLSIZE) --bottom right
+  lcd.drawText(xz+37,yz+33,"m",SMLSIZE)
 end
 
-local function BatteryData()
+local function drawBatteryData(xz, yz)
   
-  lcd.drawGauge(1,9,37,8,fuel,100)
-  lcd.drawLine(38,12,38,13,SOLID,FORCE)
+  lcd.drawGauge(xz+1,yz+9,xz+37,yz+8,fuel,100)
+  lcd.drawLine(xz+38,yz+12,xz+38,yz+13,SOLID,FORCE)
   
-  lcd.drawNumber(1,18,10*vfas,PREC1+SMLSIZE)
-  lcd.drawText(lcd.getLastPos(),18,"V",SMLSIZE)
+  lcd.drawNumber(xz+1,yz+18,10*vfas,PREC1+SMLSIZE)
+  lcd.drawText(lcd.getLastPos(),yz+18,"V",SMLSIZE)
   
-  lcd.drawNumber(1,25,100*current,PREC2+SMLSIZE)
-  lcd.drawText(lcd.getLastPos(),25,"A",SMLSIZE)
+  lcd.drawNumber(xz+1,yz+25,100*current,PREC2+SMLSIZE)
+  lcd.drawText(lcd.getLastPos(),yz+25,"A",SMLSIZE)
   
-  lcd.drawText(1,32,"Tx",SMLSIZE)
-  lcd.drawNumber(lcd.getLastPos()+1,32,100*getValue("tx-voltage"),SMLSIZE+PREC2)
-  lcd.drawText(lcd.getLastPos(),32,"V",SMLSIZE)
+  lcd.drawText(xz+1,yz+32,"Tx",SMLSIZE)
+  lcd.drawNumber(lcd.getLastPos()+1,yz+32,100*getValue("tx-voltage"),SMLSIZE+PREC2)
+  lcd.drawText(lcd.getLastPos(),yz+32,"V",SMLSIZE)
   
 end  
 
-local function other_data(zx,zy)
+local function drawOtherData(zx,zy)
   
-  lcd.drawText(zx+2,zy+1,"SWR",SMLSIZE)
-  lcd.drawNumber(lcd.getLastPos()+2,zy+1,rssi,SMLSIZE)
-  lcd.drawText(lcd.getLastPos(),zy+1,"dB",SMLSIZE)
+  lcd.drawText(zx+2,zy+9,"SWR",SMLSIZE)
+  lcd.drawNumber(lcd.getLastPos()+2,zy+9,rssi,SMLSIZE)
+  lcd.drawText(lcd.getLastPos(),zy+9,"dB",SMLSIZE)
   
-  lcd.drawText(zx+2, zy+8,"Tmp",SMLSIZE)
-  lcd.drawNumber(lcd.getLastPos()+2, zy+8, temperature, SMLSIZE)
-  lcd.drawText(lcd.getLastPos(), zy+8,"\64C",SMLSIZE)
+  lcd.drawText(zx+2, zy+16,"Tmp",SMLSIZE)
+  lcd.drawNumber(lcd.getLastPos()+2, zy+16, temperature, SMLSIZE)
+  lcd.drawText(lcd.getLastPos(), zy+16,"\64C",SMLSIZE)
   
 end
 
-local function timer(zx, zy )
+local function drawTimer(zx, zy)
 
   local datenow = getDateTime()
   local tim = model.getTimer(0)
@@ -185,23 +185,23 @@ local function run_func(event)
 
   lcd.clear() --clear lcd display
   
-  drawFrame()
+  drawFrame() --draw general frame
   
-  getTelemeryValue()
+  getTelemeryValue() --get telemetry value from reciever
   
   lcd.drawScreenTitle("Cyber Telemetry V0.1",1,1) --put there current version
   
   drawBird(64,28) --gyro horizon
   
-  WingMech(0,40) --Flaps and breaks
+  drawWindMech(0,40) --Flaps and breaks
   
-  SpeedHeadAlt() --central screen
+  drawSpeedHeadAtl(40,0) --central screen
   
-  BatteryData()
+  drawBatteryData(0,0) --battery data
   
-  other_data(87,8)
+  drawOtherData(87,0) --rssi tmp
   
-  timer(87,40)
+  drawTimer(87,40) --timer and global time
   
   if event == EVT_EXIT_BREAK then   --if "Exit" button pressed, stop program
     return 1 

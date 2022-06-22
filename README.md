@@ -9,4 +9,12 @@ Correct operation is supported at the moment:
 * Flight timer
 * Visual display and voice indication of the release of spoilers or flaps
 
+Changelist 
+
+Alpha 0.1 
+Now by changing the arguments in the draw*Something* functions, you can move blocks with data. Like this:
+
+        drawBatteryData(you_x_coordinate, you_y_coordinate)
+
+
 License: publication in sources with indication of authorship, use for commercial purposes is prohibited.
